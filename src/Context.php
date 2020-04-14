@@ -18,6 +18,11 @@ abstract class Context
     protected $properties = [];
 
     /**
+     * @var array
+     */
+    protected $methods = [];
+
+    /**
      * Context constructor.
      *
      * @param Repository $config
@@ -35,6 +40,7 @@ abstract class Context
         if ($config->has(self::REPOSITORY_KEY)) {
             $data             = $config->get(self::REPOSITORY_KEY);
             $this->properties = $data['properties'][$data['use']];
+            $this->methods = $data['methods'];
         }
     }
 
@@ -65,6 +71,23 @@ abstract class Context
         return array_key_exists($key, $this->properties) ? $this->properties[$key] : null;
     }
 
+    /**
+     * @return array
+     */
+    public function getRpcMethods()
+    {
+        return $this->methods;
+    }
+
+    /**
+     * @param string $key
+     * @return RpcHandlerInterface|null
+     */
+    public function getRpcMethod(string $key)
+    {
+        return array_key_exists($key, $this->methods) ? $this->methods[$key] : null;
+    }
+    
     /**
      * @param string $key
      * @param mixed $default

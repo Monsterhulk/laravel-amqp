@@ -7,15 +7,22 @@ return [
     | Define which configuration should be used
     |--------------------------------------------------------------------------
     */
-
     'use' => 'production',
+
+    /*
+    |--------------------------------------------------------------------------
+    | AMQP key (method name) and methods (class implement Bschmitt\Amqp\Rpc\RpcHandlerInterface)
+    |--------------------------------------------------------------------------
+    */
+    'methods' => [
+        'example' => Bschmitt\Amqp\Rpc\ExampleRpc::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
     | AMQP properties separated by key
     |--------------------------------------------------------------------------
     */
-
     'properties' => [
 
         'production' => [
@@ -26,6 +33,7 @@ return [
             'vhost'                 => '/',
             'connect_options'       => [],
             'ssl_options'           => [],
+            'content_type'          => 'application/json',
 
             'exchange'              => 'amq.topic',
             'exchange_type'         => 'topic',
@@ -55,7 +63,10 @@ return [
             'qos'                   => false,
             'qos_prefetch_size'     => 0,
             'qos_prefetch_count'    => 1,
-            'qos_a_global'          => false
+            'qos_a_global'          => false,
+
+            'queue'                 => 'worker',
+            'rpc_queue'             => 'rpc-worker',
         ],
 
     ],

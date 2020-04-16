@@ -35,7 +35,7 @@ class MessageBuilder {
     /**
      * @return mixed
      */
-    public function getPayload(): mixed {
+    public function getPayload() {
         return $this->payload;
     }
 
@@ -43,7 +43,7 @@ class MessageBuilder {
      * @param mixed $payload
      * @return MessageBuilder
      */
-    public function setPayload(mixed $payload): MessageBuilder {
+    public function setPayload($payload): MessageBuilder {
         $this->payload = $payload;
 
         return $this;

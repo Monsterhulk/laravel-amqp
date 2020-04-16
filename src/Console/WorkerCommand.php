@@ -48,7 +48,7 @@ class WorkerCommand extends Command {
     public function exec(array $data) {
         $validator = $this->validator($data, self::WORKER_VALIDATE);
         if ($validator->fails()) {
-            throw new Worker($validator->messages());
+            throw new Exception\Worker($validator->messages());
         }
         app('events')->fire($data['event'], $data['payload']);
     }
